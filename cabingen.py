@@ -1,4 +1,5 @@
 import cadquery
+import os
 
 #changebal Vars
 WoodThiknes = 1.9
@@ -64,11 +65,14 @@ cabinet.add(back)
 
 stl = cabinet.toCompound()
 
-cadquery.exporters.export(stl, 'saves/view.stl')
+if not os.path.exists('./saves'):
+    os.mkdir('./saves/', 0o777)
+
+cadquery.exporters.export(stl, './saves/view.stl')
 
 name = 'cabinet_'+ str(CabinetfWidth*10) + 'mmX' + str(CabinetfDeeps*10) + 'mmX' + str(CabinetfHeight*10) + '_bord_tikness_'+ str(WoodThiknes*10) +'mm'
 
-with open('saves/'+ name + '.txt', 'w') as f:
+with open('./saves/'+ name + '.txt', 'w') as f:
     f.writelines('Door: '+ str(DoorWidth*10) + 'mm X ' + str(DoorHeight*10) + 'mm X' + str(WoodThiknes*10) + 'mm\n')
     f.writelines('Side: '+ str(SideWidth*10) + 'mm X ' + str(SideHeight*10) + 'mm X' + str(WoodThiknes*10) + 'mm  x2\n' )
     f.writelines('Bottom: '+ str(TopBordWidth*10) + 'mm X ' + str(TopBordHeight*10) + 'mm X' + str(WoodThiknes*10) + 'mm\n')
