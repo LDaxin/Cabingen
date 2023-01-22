@@ -1,7 +1,7 @@
 import cadquery
 import os
 
-#changebal Vars
+#changeable vars
 WoodThiknes = 1.9
 
 CabinetWidth = 50
@@ -14,7 +14,7 @@ BordAmount = 3
 
 TopBord = True
 Door = False
-
+#-------------------------------------------------------------------------#
 #Calculated Vars
 
 DoorWidth = CabinetWidth - (Abstand*2)
