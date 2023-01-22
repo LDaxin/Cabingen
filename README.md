@@ -11,3 +11,4 @@ Open the script cabingen.py and under changeable vars you can put in the measure
 - [ ] add draws
 - [ ] add connection types
 - [ ] add drawings
+- [ ] add Explosion view
