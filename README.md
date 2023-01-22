@@ -9,7 +9,7 @@ Open the script cabingen.py and under changeable vars you can put in the measure
 ### added
 - [X] generate simple cabinet
 - [X] generate simple shelf
-- [X] STL export (cadquery)
+- [X] STL export (needs cadquery installed)
 - [X] Explosion view
 
 ### to be added

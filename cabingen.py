@@ -1,7 +1,6 @@
-import cadquery
 import os
 
-#changeable vars
+#-changeable vars--------------------------------------------------------------------------
 WoodThiknes = 1.9
 
 CabinetWidth = 50
@@ -16,8 +15,7 @@ TopBord = True
 Door = True
 
 ExplosionsView = True
-#-------------------------------------------------------------------------#
-#Calculated Vars
+#-Calculated Vars-------------------------------------------------------------------------
 
 
 if ExplosionsView:
@@ -55,39 +53,49 @@ else:
     SideWidth = CabinetDeeps
 
 
-# XYZ
-cabinet = cadquery.Assembly()
-door = cadquery.Workplane().box(DoorWidth, WoodThiknes, DoorHeight, False).translate([Abstand, -explosion, Abstand])
+#-CadQuery---------------------------------------------------------------------------------
+try:
+    import cadquery
 
-left = cadquery.Workplane().box(WoodThiknes, SideWidth, SideHeight, False).translate([-explosion, DoorDistance, WoodThiknes])
+    cabinet = cadquery.Assembly()
 
-right = cadquery.Workplane().box(WoodThiknes, SideWidth, SideHeight, False).translate([CabinetWidth-WoodThiknes+explosion, DoorDistance, WoodThiknes])
+    door = cadquery.Workplane().box(DoorWidth, WoodThiknes, DoorHeight, False).translate([Abstand, -explosion, Abstand])
 
-back = cadquery.Workplane().box(BackWidth, WoodThiknes, BackHeight, False).translate([WoodThiknes, CabinetDeeps - WoodThiknes + explosion, WoodThiknes])
+    left = cadquery.Workplane().box(WoodThiknes, SideWidth, SideHeight, False).translate([-explosion, DoorDistance, WoodThiknes])
 
-bord = cadquery.Workplane().box(TopBordWidth,TopBordHeight, WoodThiknes, False).translate([ 0, DoorDistance, 0])
-cabinet.add(bord)
+    right = cadquery.Workplane().box(WoodThiknes, SideWidth, SideHeight, False).translate([CabinetWidth-WoodThiknes+explosion, DoorDistance, WoodThiknes])
 
-for x in range(0, BordAmount +1):
-    bord = cadquery.Workplane().box(BordWidth,BordHeight, WoodThiknes, False).translate([ WoodThiknes, DoorDistance, (CabinetHeight/(BordAmount+1))*x])
+    back = cadquery.Workplane().box(BackWidth, WoodThiknes, BackHeight, False).translate([WoodThiknes, CabinetDeeps - WoodThiknes + explosion, WoodThiknes])
+
+    bord = cadquery.Workplane().box(TopBordWidth,TopBordHeight, WoodThiknes, False).translate([ 0, DoorDistance, 0])
     cabinet.add(bord)
 
-if TopBord:
-    bord = cadquery.Workplane().box(TopBordWidth,TopBordHeight, WoodThiknes, False).translate([ 0, DoorDistance, CabinetHeight-WoodThiknes])
-    cabinet.add(bord)
+    for x in range(0, BordAmount +1):
+        bord = cadquery.Workplane().box(BordWidth,BordHeight, WoodThiknes, False).translate([ WoodThiknes, DoorDistance, (CabinetHeight/(BordAmount+1))*x])
+        cabinet.add(bord)
 
-if Door:
-    cabinet.add(door)
-cabinet.add(left)
-cabinet.add(right)
-cabinet.add(back)
+    if TopBord:
+        bord = cadquery.Workplane().box(TopBordWidth,TopBordHeight, WoodThiknes, False).translate([ 0, DoorDistance, CabinetHeight-WoodThiknes])
+        cabinet.add(bord)
 
-stl = cabinet.toCompound()
+    if Door:
+        cabinet.add(door)
+    cabinet.add(left)
+    cabinet.add(right)
+    cabinet.add(back)
 
+    stl = cabinet.toCompound()
+    NoCadquery = False
+except ModuleNotFoundError:
+    NoCadquery = True
+    print("CadQuery is not installed if you want a stl view run pip3 install cadquery")
+
+
+#Export----------------------------------------------------------------------------------
 if not os.path.exists('./saves'):
     os.mkdir('./saves/', 0o777)
-
-cadquery.exporters.export(stl, './saves/view.stl')
+if not NoCadquery:
+    cadquery.exporters.export(stl, './saves/view.stl')
 
 name = 'cabinet_'+ str(CabinetWidth*10) + 'mmX' + str(CabinetDeeps*10) + 'mmX' + str(CabinetHeight*10) + '_bord_tikness_'+ str(WoodThiknes*10) +'mm'
 
