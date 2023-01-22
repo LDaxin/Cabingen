@@ -13,9 +13,17 @@ Abstand = 0.4
 BordAmount = 3 
 
 TopBord = True
-Door = False
+Door = True
+
+ExplosionsView = True
 #-------------------------------------------------------------------------#
 #Calculated Vars
+
+
+if ExplosionsView:
+    explosion = 20
+else:
+    explosion = 0
 
 DoorWidth = CabinetWidth - (Abstand*2)
 DoorHeight = CabinetHeight - (Abstand*2)
@@ -49,13 +57,13 @@ else:
 
 # XYZ
 cabinet = cadquery.Assembly()
-door = cadquery.Workplane().box(DoorWidth, WoodThiknes, DoorHeight, False).translate([Abstand, 0, Abstand])
+door = cadquery.Workplane().box(DoorWidth, WoodThiknes, DoorHeight, False).translate([Abstand, -explosion, Abstand])
 
-left = cadquery.Workplane().box(WoodThiknes, SideWidth, SideHeight, False).translate([0, DoorDistance, WoodThiknes])
+left = cadquery.Workplane().box(WoodThiknes, SideWidth, SideHeight, False).translate([-explosion, DoorDistance, WoodThiknes])
 
-right = cadquery.Workplane().box(WoodThiknes, SideWidth, SideHeight, False).translate([CabinetWidth-WoodThiknes, DoorDistance, WoodThiknes])
+right = cadquery.Workplane().box(WoodThiknes, SideWidth, SideHeight, False).translate([CabinetWidth-WoodThiknes+explosion, DoorDistance, WoodThiknes])
 
-back = cadquery.Workplane().box(BackWidth, WoodThiknes, BackHeight, False).translate([WoodThiknes, CabinetDeeps - WoodThiknes, WoodThiknes])
+back = cadquery.Workplane().box(BackWidth, WoodThiknes, BackHeight, False).translate([WoodThiknes, CabinetDeeps - WoodThiknes + explosion, WoodThiknes])
 
 bord = cadquery.Workplane().box(TopBordWidth,TopBordHeight, WoodThiknes, False).translate([ 0, DoorDistance, 0])
 cabinet.add(bord)

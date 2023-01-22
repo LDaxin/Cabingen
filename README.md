@@ -5,10 +5,19 @@ Cabingen is a Python script generates a cabinet/shelf with just a few Variables 
 ## how to
 Open the script cabingen.py and under changeable vars you can put in the measurements you need and then just run the code.
 
-## future
-- [ ] add graphical inteface 
-- [ ] add multi cabinet/shelf generation
-- [ ] add draws
-- [ ] add connection types
-- [ ] add drawings
-- [ ] add Explosion view
+## Features
+### added
+- [X] generate simple cabinet
+- [X] generate simple shelf
+- [X] STL export (cadquery)
+- [X] Explosion view
+
+### to be added
+- [ ] cli
+- [ ] gui 
+- [ ] Tools
+- [ ] hardware besides wood
+- [ ] multi cabinet/shelf generation
+- [ ] draws
+- [ ] connection types (joints)
+- [ ] drawings
