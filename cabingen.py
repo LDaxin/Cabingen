@@ -101,6 +101,7 @@ name = 'cabinet_'+ str(CabinetWidth*10) + 'mmX' + str(CabinetDeeps*10) + 'mmX' +
 
 with open('./saves/'+ name + '.txt', 'w') as f:
     f.writelines('Door: '+ str(DoorWidth*10) + 'mm X ' + str(DoorHeight*10) + 'mm X' + str(WoodThiknes*10) + 'mm\n')
+    f.writelines('Back: '+ str(BackWidth*10) + 'mm X ' + str(BackHeight*10) + 'mm X' + str(WoodThiknes*10) + 'mm\n')
     f.writelines('Side: '+ str(SideWidth*10) + 'mm X ' + str(SideHeight*10) + 'mm X' + str(WoodThiknes*10) + 'mm  x2\n' )
     f.writelines('Bottom: '+ str(TopBordWidth*10) + 'mm X ' + str(TopBordHeight*10) + 'mm X' + str(WoodThiknes*10) + 'mm\n')
     if TopBord:
