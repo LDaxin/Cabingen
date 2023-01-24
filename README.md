@@ -11,6 +11,7 @@ Open the script cabingen.py and under changeable vars you can put in the measure
 - [X] generate simple shelf
 - [X] STL export (needs cadquery installed)
 - [X] Explosion view
+- [X] lipping calculation
 
 ### to be added
 - [ ] cli
@@ -21,3 +22,4 @@ Open the script cabingen.py and under changeable vars you can put in the measure
 - [ ] draws
 - [ ] connection types (joints)
 - [ ] drawings
+

@@ -9,14 +9,13 @@ CabinetDeeps = 34
 
 Abstand = 0.4
 
-BordAmount = 3 
+BordAmount = 1 
 
-TopBord = True
+TopBord = False
 Door = True
 
 ExplosionsView = True
 #-Calculated Vars-------------------------------------------------------------------------
-
 
 if ExplosionsView:
     explosion = 20
@@ -52,6 +51,7 @@ else:
     TopBordHeight = CabinetDeeps
     SideWidth = CabinetDeeps
 
+Lipping = (DoorWidth + DoorHeight)*2 + (SideHeight + TopBordWidth + CabinetDeeps)*4 + BordWidth*BordAmount
 
 #-CadQuery---------------------------------------------------------------------------------
 try:
@@ -90,10 +90,10 @@ except ModuleNotFoundError:
     NoCadquery = True
     print("CadQuery is not installed if you want a stl view run pip3 install cadquery")
 
-
 #Export----------------------------------------------------------------------------------
 if not os.path.exists('./saves'):
     os.mkdir('./saves/', 0o777)
+
 if not NoCadquery:
     cadquery.exporters.export(stl, './saves/view.stl')
 
@@ -106,3 +106,4 @@ with open('./saves/'+ name + '.txt', 'w') as f:
     if TopBord:
         f.writelines('Top: '+ str(TopBordWidth*10) + 'mm X ' + str(TopBordHeight*10) + 'mm X' + str(WoodThiknes*10) + 'mm\n')
     f.writelines('Bord: '+ str(BordWidth*10) + 'mm X ' + str(BordHeight*10) + 'mm X' + str(WoodThiknes*10) + 'mm  x'+str(BordAmount)+'\n')
+    f.writelines('Lipping: '+ str(Lipping*10) + 'mm' )
